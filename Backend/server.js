@@ -16,8 +16,9 @@ app.use(
   })
 );
 app.use(express.json());
-app.use("/api" , chatRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api" , chatRoutes);
+
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 

@@ -5,7 +5,7 @@ import ChatWindow from "./ChatWindow";
 import Auth from "./components/Auth";
 import "./App.css";
 
-const API_BASE = "https://somai.onrender.com";
+const API_BASE = "https://somai.onrender.com/api";
 
 function App() {
   const [threads, setThreads] = useState([]);
