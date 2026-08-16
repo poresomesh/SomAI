@@ -11,20 +11,23 @@ html, body, #root {
   background-color: #131314;
   color: #e3e3e3;
   overflow: hidden;
-  height: 100vh;
+  height: 100%;
+  height: 100dvh;
   width: 100vw;
+  position: fixed;
 }
 
 .app-container {
   display: flex;
-  height: 100vh;
+  height: 100%;
+  height: 100dvh;
   width: 100vw;
   background-color: #131314;
   overflow: hidden;
   position: relative;
 }
 
-/* Custom Scrollbars */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -39,9 +42,6 @@ html, body, #root {
   background: #484a4d;
 }
 
-/* --- Mobile Responsive Rules (Gemini Style) --- */
-
-/* लॅपटॉपवर मोबाईल मेनू आणि क्लोज बटणे लपवून ठेवणे */
 .mobile-menu-toggle,
 .mobile-close-btn,
 .mobile-overlay {
@@ -49,7 +49,6 @@ html, body, #root {
 }
 
 @media screen and (max-width: 768px) {
-  /* ☰ हॅम्बर्गर मेनू बटण */
   .mobile-menu-toggle {
     display: flex;
     align-items: center;
@@ -62,11 +61,7 @@ html, body, #root {
     border-radius: 50%;
     margin-right: 8px;
   }
-  .mobile-menu-toggle:hover {
-    background-color: #282a2c;
-  }
 
-  /* ✕ क्लोज बटण */
   .mobile-close-btn {
     display: flex;
     align-items: center;
@@ -78,10 +73,6 @@ html, body, #root {
     padding: 6px;
     border-radius: 50%;
   }
-  .mobile-close-btn:hover {
-    background-color: #282a2c;
-    color: #ffffff;
-  }
 
   .sidebar-header {
     display: flex;
@@ -89,33 +80,11 @@ html, body, #root {
     justify-content: space-between;
   }
 
-  /* मोबाईलवर चॅट विंडो पूर्ण १००% स्क्रीन घेईल */
-  .chat-window {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    height: 100vh !important;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 16px;
-  }
-
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-  }
-
-  /* मोबाईलवर साईडबार डाव्या बाजूला लपवून ठेवणे */
   .sidebar {
     position: fixed !important;
     top: 0;
     left: 0;
-    height: 100vh !important;
+    height: 100dvh !important;
     width: 280px !important;
     max-width: 80vw !important;
     z-index: 1000 !important;
@@ -125,19 +94,17 @@ html, body, #root {
     box-shadow: 4px 0 15px rgba(0, 0, 0, 0.6);
   }
 
-  /* मेनू बटण दाबल्यावर साईडबार स्लाईड होऊन पुढे येईल */
   .sidebar.open {
     transform: translateX(0) !important;
   }
 
-  /* साईडबारच्या मागे काळा ट्रान्सपरंट पडदा */
   .mobile-overlay {
     display: block;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background: rgba(0, 0, 0, 0.6);
     z-index: 999;
   }

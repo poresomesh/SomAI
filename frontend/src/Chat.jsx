@@ -2,13 +2,13 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { MyContext } from "./MyContext";
 import "./Chat.css";
 
-// 🟢 Gemini Style Word-by-Word Typing Component
-function TypewriterMessage({ text, isLatestAssistant, onUpdate }) {
-  const [displayedText, setDisplayedText] = useState(isLatestAssistant ? "" : text);
+// 🟢 Gemini Style Word-by-Word Typewriter Component
+function TypewriterMessage({ text, isLatestAssistant }) {
+  const [displayedText, setDisplayedText] = useState(isLatestAssistant ? "" : text || "");
 
   useEffect(() => {
-    if (!isLatestAssistant) {
-      setDisplayedText(text);
+    if (!isLatestAssistant || !text) {
+      setDisplayedText(text || "");
       return;
     }
 
@@ -18,13 +18,15 @@ function TypewriterMessage({ text, isLatestAssistant, onUpdate }) {
 
     const interval = setInterval(() => {
       if (currentIndex < words.length) {
-        setDisplayedText((prev) => (prev ? prev + " " + words[currentIndex] : words[currentIndex]));
+        const nextWord = words[currentIndex];
+        if (nextWord !== undefined) {
+          setDisplayedText((prev) => (prev ? prev + " " + nextWord : nextWord));
+        }
         currentIndex++;
-        if (onUpdate) onUpdate();
       } else {
         clearInterval(interval);
       }
-    }, 30); // टायपिंगचा वेग (30ms per word)
+    }, 25);
 
     return () => clearInterval(interval);
   }, [text, isLatestAssistant]);
@@ -36,25 +38,24 @@ function Chat() {
   const { messages, loading, user } = useContext(MyContext);
   const latestPromptRef = useRef(null);
 
-  // शेवटच्या user आणि assistant मेसेजचा index
   const lastUserIndex = messages.map((m) => m.role).lastIndexOf("user");
   const lastAssistantIndex = messages.map((m) => m.role === "model" || m.role === "assistant").lastIndexOf(true);
 
-  // 🟢 प्रश्न Top ला आणणारे स्क्रोल फंक्शन
-  const scrollToPromptTop = () => {
-    const chatBody = document.querySelector(".chat-body");
-    if (chatBody && latestPromptRef.current) {
-      const targetTop = latestPromptRef.current.offsetTop - chatBody.offsetTop;
-      chatBody.scrollTo({
-        top: Math.max(0, targetTop - 10),
-        behavior: "smooth",
-      });
-    }
-  };
-
+  // 🟢 नवीन प्रश्न विचारताच तो Top ला नेऊन लॉक करणे
   useEffect(() => {
     if (latestPromptRef.current) {
-      setTimeout(scrollToPromptTop, 50);
+      const scrollTimer = setTimeout(() => {
+        const chatBody = document.querySelector(".chat-body");
+        if (chatBody && latestPromptRef.current) {
+          const targetTop = latestPromptRef.current.offsetTop - chatBody.offsetTop;
+          chatBody.scrollTo({
+            top: Math.max(0, targetTop - 12),
+            behavior: "smooth",
+          });
+        }
+      }, 50);
+
+      return () => clearTimeout(scrollTimer);
     }
   }, [messages.length, loading]);
 
@@ -136,7 +137,7 @@ function Chat() {
         </div>
       )}
 
-      {messages.length > 0 && <div className="bottom-scroll-spacer" />}
+      {messages.length > 0 && <div className="gemini-bottom-spacer" />}
     </div>
   );
 }
