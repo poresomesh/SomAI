@@ -4,19 +4,17 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-bottom: 20px;
 }
 
 .message-row {
   display: flex;
   gap: 14px;
   width: 100%;
-  scroll-margin-top: 16px;
 }
 
 .message-row.user {
   justify-content: flex-end;
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .message-row.assistant {
@@ -25,7 +23,7 @@
 
 .message-bubble {
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.65;
   max-width: 85%;
   word-break: break-word;
   white-space: pre-wrap;
@@ -41,7 +39,7 @@
 .message-row.assistant .message-bubble {
   background-color: transparent;
   color: #e3e3e3;
-  padding: 4px 0;
+  padding: 2px 0;
 }
 
 .gemini-sparkle-icon {
@@ -85,16 +83,16 @@
   40% { transform: scale(1); opacity: 1; }
 }
 
-/* 🟢 डेस्कटॉप Empty Chat */
+/* सुरुवातीचा व्ह्यू (New Chat Screen) */
 .empty-chat {
-  margin-top: 10vh;
+  margin-top: 8vh;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
 .empty-chat-hello {
-  font-size: 52px;
+  font-size: 48px;
   font-weight: 500;
   letter-spacing: -1px;
   background: linear-gradient(74deg, #4285f4 0%, #9b72cf 20%, #d96570 40%, #131314 100%);
@@ -104,26 +102,24 @@
 }
 
 .empty-chat-sub {
-  font-size: 52px;
+  font-size: 48px;
   font-weight: 500;
   color: #444746;
   letter-spacing: -1px;
 }
 
 .bottom-scroll-spacer {
-  height: 30vh;
+  height: 45vh;
   flex-shrink: 0;
 }
 
-/* 🟢 मोबाईल स्क्रीनसाठी खास फिक्स */
 @media screen and (max-width: 768px) {
   .empty-chat {
-    margin-top: 6vh;
-    padding: 0 4px;
+    margin-top: 4vh;
   }
 
   .empty-chat-hello {
-    font-size: 32px; /* मोबाईलवर व्यवस्थित बसेल */
+    font-size: 32px;
     line-height: 1.2;
   }
 
@@ -138,6 +134,6 @@
   }
 
   .bottom-scroll-spacer {
-    height: 15vh;
+    height: 35vh;
   }
 }

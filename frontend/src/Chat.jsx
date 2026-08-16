@@ -1,23 +1,62 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { MyContext } from "./MyContext";
 import "./Chat.css";
+
+// 🟢 Gemini Style Word-by-Word Typing Component
+function TypewriterMessage({ text, isLatestAssistant, onUpdate }) {
+  const [displayedText, setDisplayedText] = useState(isLatestAssistant ? "" : text);
+
+  useEffect(() => {
+    if (!isLatestAssistant) {
+      setDisplayedText(text);
+      return;
+    }
+
+    const words = text.split(" ");
+    let currentIndex = 0;
+    setDisplayedText("");
+
+    const interval = setInterval(() => {
+      if (currentIndex < words.length) {
+        setDisplayedText((prev) => (prev ? prev + " " + words[currentIndex] : words[currentIndex]));
+        currentIndex++;
+        if (onUpdate) onUpdate();
+      } else {
+        clearInterval(interval);
+      }
+    }, 30); // टायपिंगचा वेग (30ms per word)
+
+    return () => clearInterval(interval);
+  }, [text, isLatestAssistant]);
+
+  return <div className="message-bubble">{displayedText}</div>;
+}
 
 function Chat() {
   const { messages, loading, user } = useContext(MyContext);
   const latestPromptRef = useRef(null);
 
+  // शेवटच्या user आणि assistant मेसेजचा index
   const lastUserIndex = messages.map((m) => m.role).lastIndexOf("user");
+  const lastAssistantIndex = messages.map((m) => m.role === "model" || m.role === "assistant").lastIndexOf(true);
+
+  // 🟢 प्रश्न Top ला आणणारे स्क्रोल फंक्शन
+  const scrollToPromptTop = () => {
+    const chatBody = document.querySelector(".chat-body");
+    if (chatBody && latestPromptRef.current) {
+      const targetTop = latestPromptRef.current.offsetTop - chatBody.offsetTop;
+      chatBody.scrollTo({
+        top: Math.max(0, targetTop - 10),
+        behavior: "smooth",
+      });
+    }
+  };
 
   useEffect(() => {
     if (latestPromptRef.current) {
-      setTimeout(() => {
-        latestPromptRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 50);
+      setTimeout(scrollToPromptTop, 50);
     }
-  }, [messages.length]);
+  }, [messages.length, loading]);
 
   return (
     <div className="chat-messages-container">
@@ -32,6 +71,7 @@ function Chat() {
         messages.map((msg, index) => {
           const isModel = msg.role === "model" || msg.role === "assistant";
           const isLatestUser = index === lastUserIndex;
+          const isLatestAssistant = isModel && index === lastAssistantIndex;
 
           return (
             <div
@@ -65,7 +105,14 @@ function Chat() {
                   </svg>
                 </div>
               )}
-              <div className="message-bubble">{msg.content}</div>
+              {isModel ? (
+                <TypewriterMessage
+                  text={msg.content}
+                  isLatestAssistant={isLatestAssistant}
+                />
+              ) : (
+                <div className="message-bubble">{msg.content}</div>
+              )}
             </div>
           );
         })
@@ -89,7 +136,7 @@ function Chat() {
         </div>
       )}
 
-      <div className="bottom-scroll-spacer" />
+      {messages.length > 0 && <div className="bottom-scroll-spacer" />}
     </div>
   );
 }
