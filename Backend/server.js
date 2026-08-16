@@ -11,7 +11,7 @@ import authRoutes from "./routes/auth.js";
 const app = express();
 app.use(
   cors({
-    origin: "*",
+    origin: "https://somai-frontend.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
