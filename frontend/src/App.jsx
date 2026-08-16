@@ -14,6 +14,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [isAuthChecking, setIsAuthChecking] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // युझर लॉगिन स्टेट
   useEffect(() => {
@@ -48,9 +49,10 @@ function App() {
     }
   }, [user]);
 
-  // थ्रेड निवडणे
+  // थ्रेड निवडणे (मोबाईलवर निवडल्यास साईडबार आपोआप बंद होईल)
   const handleSelectThread = async (id) => {
     setCurrentThreadId(id);
+    setIsSidebarOpen(false);
     try {
       const res = await fetch(`${API_BASE}/thread/${id}`);
       const data = await res.json();
@@ -64,6 +66,7 @@ function App() {
   const handleNewChat = () => {
     setCurrentThreadId(Date.now().toString());
     setMessages([]);
+    setIsSidebarOpen(false);
   };
 
   // साधा टेक्स्ट मेसेज पाठवणे
@@ -144,9 +147,18 @@ function App() {
         handleNewChat,
         handleSendMessage,
         handleDeleteThread,
+        isSidebarOpen,
+        setIsSidebarOpen,
       }}
     >
       <div className="app-container">
+        {/* मोबाईलवर बाहेर टॅप केल्यावर साईडबार बंद होण्यासाठी ओव्हरले */}
+        {isSidebarOpen && (
+          <div
+            className="mobile-overlay"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
         <Sidebar user={user} onLogout={handleLogout} />
         <ChatWindow user={user} />
       </div>

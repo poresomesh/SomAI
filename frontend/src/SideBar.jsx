@@ -9,16 +9,29 @@ function SideBar({ user, onLogout }) {
     handleSelectThread,
     handleNewChat,
     handleDeleteThread,
+    isSidebarOpen,
+    setIsSidebarOpen,
   } = useContext(MyContext);
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
       <div className="sidebar-header">
         <button className="new-chat-btn" onClick={handleNewChat}>
           <svg viewBox="0 0 24 24">
             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
           </svg>
           New chat
+        </button>
+
+        {/* मोबाईलवर साईडबार बंद करण्यासाठी Close (✕) बटण */}
+        <button
+          className="mobile-close-btn"
+          onClick={() => setIsSidebarOpen(false)}
+          title="Close Sidebar"
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+          </svg>
         </button>
       </div>
 
@@ -51,7 +64,6 @@ function SideBar({ user, onLogout }) {
           ))}
       </div>
 
-              
       <div className="sidebar-footer-custom">
         <div className="user-profile-row">
           <div className="user-glow-avatar">
@@ -73,7 +85,6 @@ function SideBar({ user, onLogout }) {
           <span>Sign Out</span>
         </button>
       </div>
-
     </aside>
   );
 }

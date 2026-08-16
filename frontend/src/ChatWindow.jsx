@@ -4,7 +4,7 @@ import Chat from "./Chat";
 import "./ChatWindow.css";
 
 function ChatWindow({ user }) {
-  const { handleSendMessage, loading } = useContext(MyContext);
+  const { handleSendMessage, loading, setIsSidebarOpen } = useContext(MyContext);
   const [input, setInput] = useState("");
 
   const handleSubmit = (e) => {
@@ -19,6 +19,16 @@ function ChatWindow({ user }) {
       {/* Top Navbar */}
       <header className="navbar">
         <div className="navbar-brand">
+          {/* मोबाईलवर साईडबार उघडण्यासाठी ☰ बटण */}
+          <button
+            className="mobile-menu-toggle"
+            onClick={() => setIsSidebarOpen(true)}
+            title="Open History"
+          >
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+          </button>
           <h2>SomAI</h2>
         </div>
         <div className="navbar-user-avatar">
