@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600&family=Roboto:wght@400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html , body , #root{
+  background-color: #131314;
+  color: #e3e3e3;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #131314;
+  overflow: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #333537;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #484a4d;
+}

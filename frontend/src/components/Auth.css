@@ -1,0 +1,140 @@
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #131314;
+  padding: 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: #1e1f20;
+  border: 1px solid #3c4043;
+  border-radius: 28px;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.auth-logo h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #e3e3e3;
+}
+
+.auth-title {
+  font-size: 26px;
+  font-weight: 500;
+  color: #f2f2f2;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.auth-subtitle {
+  font-size: 14px;
+  color: #8e918f;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.auth-error-badge {
+  width: 100%;
+  background-color: rgba(217, 101, 112, 0.15);
+  border: 1px solid #d96570;
+  color: #f28b82;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.auth-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #c4c7c5;
+  font-weight: 500;
+}
+
+.form-group input {
+  background-color: #131314;
+  border: 1px solid #3c4043;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 15px;
+  color: #e3e3e3;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #a8c7fa;
+}
+
+.auth-submit-btn {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #a8c7fa, #7cacf8);
+  color: #041e49;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.auth-submit-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.auth-submit-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #8e918f;
+}
+
+.auth-switch-btn {
+  background: none;
+  border: none;
+  color: #a8c7fa;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.auth-switch-btn:hover {
+  text-decoration: underline;
+}

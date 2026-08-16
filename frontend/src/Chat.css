@@ -1,0 +1,115 @@
+.chat-messages-container {
+  width: 100%;
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.message-row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  scroll-margin-top: 24px; /* 🟢 वरून अंतर ठेवून Top ला थांबेल */
+}
+
+.message-row.user {
+  justify-content: flex-end;
+  margin-top: 32px;
+}
+
+.message-row.assistant {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 80%;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.message-row.user .message-bubble {
+  background-color: #282a2c;
+  color: #e3e3e3;
+  padding: 12px 22px;
+  border-radius: 24px;
+}
+
+.message-row.assistant .message-bubble {
+  background-color: transparent;
+  color: #e3e3e3;
+  padding: 4px 0;
+}
+
+.gemini-sparkle-icon {
+  width: 24px;
+  height: 24px;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.gemini-sparkle-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.loading-indicator {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.loading-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+}
+
+.loading-dots span {
+  width: 7px;
+  height: 7px;
+  background-color: #a8c7fa;
+  border-radius: 50%;
+  animation: pulse 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes pulse {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.empty-chat {
+  margin-top: 18vh;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty-chat-hello {
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  background: linear-gradient(74deg, #4285f4 0%, #9b72cf 15%, #d96570 30%, #131314 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.empty-chat-sub {
+  font-size: 56px;
+  font-weight: 500;
+  color: #444746;
+  letter-spacing: -1.5px;
+}
+
+/* 🟢 स्क्रीनइतकी मोकळी जागा */
+.bottom-scroll-spacer {
+  height: 70vh;
+  flex-shrink: 0;
+}
