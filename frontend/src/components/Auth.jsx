@@ -19,7 +19,7 @@ function Auth({ onAuthSuccess }) {
     const endpoint = isLogin ? "/api/auth/login" : "/api/auth/signup";
 
     try {
-      const res = await fetch(`http://localhost:8080${endpoint}`, {
+      const res = await fetch(`https://somai.onrender.com${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
