@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { MyContext } from "./MyContext";
-import Sidebar from "./Sidebar";
+import Sidebar from "./SideBar";
 import ChatWindow from "./ChatWindow";
 import Auth from "./components/Auth";
 import "./App.css";
