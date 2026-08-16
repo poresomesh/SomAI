@@ -3,14 +3,12 @@ import { MyContext } from "./MyContext";
 import "./Chat.css";
 
 function Chat() {
-  const { messages, loading } = useContext(MyContext);
+  const { messages, loading, user } = useContext(MyContext);
   const latestPromptRef = useRef(null);
 
-  // शेवटच्या user message चा index
   const lastUserIndex = messages.map((m) => m.role).lastIndexOf("user");
 
   useEffect(() => {
-    // DOM रेंडर होताच नवीन प्रॉम्प्टला स्क्रीनच्या वर आणणे
     if (latestPromptRef.current) {
       setTimeout(() => {
         latestPromptRef.current.scrollIntoView({
@@ -25,7 +23,9 @@ function Chat() {
     <div className="chat-messages-container">
       {messages.length === 0 ? (
         <div className="empty-chat">
-          <h1 className="empty-chat-hello">Hello, User</h1>
+          <h1 className="empty-chat-hello">
+            Hello, {user?.name ? user.name : "User"}
+          </h1>
           <h1 className="empty-chat-sub">How can I help you today?</h1>
         </div>
       ) : (
@@ -89,7 +89,6 @@ function Chat() {
         </div>
       )}
 
-      {/* 🟢 ही मोकळी जागा नवीन मेसेजला Top ला ढकलण्यासाठी आवश्यक आहे */}
       <div className="bottom-scroll-spacer" />
     </div>
   );
