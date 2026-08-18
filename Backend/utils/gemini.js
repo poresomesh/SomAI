@@ -5,7 +5,7 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 export default async function getGeminiAPIResponse(message) {
   try {
     const chatCompletion = await groq.chat.completions.create({
-      model: "llama3-8b-8192",
+      model: "gemma2-9b-it",
       messages: [{ role: "user", content: message }],
       temperature: 0.7,
       max_tokens: 1024,
